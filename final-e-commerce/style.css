@@ -1,0 +1,63 @@
+.logo {
+  color: rgb(23, 216, 23);
+  padding: 8px;
+}
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+/* selected link */
+a:active {
+  color: black;
+}
+
+.navbar-nav a {
+  border-bottom: 2px solid transparent;
+}
+
+.navbar-nav a:hover {
+  border-bottom: 2px solid rgb(23, 216, 23);
+}
+
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 18rem !important;
+  border: 2px solid transparent !important;
+  box-shadow: 13px 22px 62px -23px rgba(0, 0, 0, 0.75);
+
+}
+
+.card:hover {
+  border: 2px solid rgb(23, 216, 23);
+}
+
+.row {
+  padding: 20px !important;
+}
+
+.navbar-expand-lg {
+  justify-content: space-between !important;
+}
+
+.imagees {
+  height: 200px;
+  width: 250px;
+  object-fit: contain;
+}

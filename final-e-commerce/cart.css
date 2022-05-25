@@ -1,0 +1,42 @@
+.logo {
+  color: rgb(23, 216, 23);
+  padding: 8px;
+}
+
+.navbar-nav a {
+  border-bottom: 2px solid transparent;
+}
+
+.navbar-nav a:hover {
+  border-bottom: 2px solid rgb(23, 216, 23);
+}
+
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 18rem !important;
+
+  box-shadow: 13px 22px 62px -23px rgba(0, 0, 0, 0.75);
+
+
+}
+
+.imagees {
+  height: 200px;
+  width: 250px;
+  object-fit: contain;
+}
+
+.row {
+  margin: 20px !important;
+}
+
+.d-grid {
+  padding-top: 5px;
+}

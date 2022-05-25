@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e-Commerce</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+
+var finalquantity='1';
+    var quantity = 1;
+    var total_Amount = '';
+
+    function add(price, id) {
+      var quantityfist=  document.getElementById('quantity'+id).innerHTML;
+      quantity=parseInt(quantityfist)+1;
+
+      document.getElementById('quantity'+id).innerHTML = ' ' + quantity + ' ';
+      total_Amount = parseFloat(quantity) * parseFloat(price);
+      document.getElementById('totalAmount'+id).innerHTML = '$ ' + total_Amount + ' ';
+      finalquantity=quantity;
+    }
+    function minuss(price, id) {
+      var quantityfist=  document.getElementById('quantity'+id).innerHTML;
+
+quantity=parseInt(quantityfist)-1;
+      document.getElementById('quantity'+id).innerHTML = ' ' + quantity + ' ';
+      total_Amount = parseInt(quantity) * parseFloat(price);
+      document.getElementById('totalAmount'+id).innerHTML = '$ ' + total_Amount + ' ';
+      finalquantity=quantity;
+    }
+
+    function finished() {
+      alert('Finished')
+    }
+    // localStorage.removeItem("newcartitem");
+
+    function addCart(id) {
+
+      alert('Added to Cart'+finalquantity)
+
+
+
+      if (localStorage.getItem("newcartitem")) {
+        var datata = JSON.parse(localStorage.getItem("newcartitem"));
+        var size = Object.keys(datata).length;
+        console.log(size);
+
+        datata.push([id, finalquantity, size+1]);
+        console.log(datata);
+        localStorage.setItem("newcartitem", JSON.stringify(datata));
+        
+      }
+      // 
+      else {
+        var myarray = [[id, finalquantity, 1]];
+
+        localStorage.setItem("newcartitem", JSON.stringify(myarray));
+
+      }
+      finalquantity='1';
+    }
+
+    $(document).ready(function () {
+
+      fetch('./sampledata.json').then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        console.log(data);
+        $.each(data, function (key, value) {
+          $("#content").append(`<div class="row">
+<div class="card" >
+  <img src="${value.image}" class="imagees" alt="...">
+  <div class="card-body">
+    <h6 class="card-title">${value.title}</h6>
+
+
+   <p>Price :  <span class="badge bg-info text-dark"> $ ${value.price}</span></p>
+   <p> <span class="badge  bg-success">${value.rating.rate} *</span> ${value.rating.count} ratings </p>
+
+
+   <p>Quantity: <button type="button" class="btn btn-danger btn-sm" onclick="minuss('${value.price}', '${value.id}')">-</button><span id="quantity${value.id}">  ${quantity}  </span><button type="button" class="btn btn-success btn-sm" onclick="add(' ${value.price}', '${value.id}')">+</button>
+   </p>
+<b>Total Amount:<span id="totalAmount${value.id}"> $ ${value.price}</span></b>
+   <div class="d-grid gap-2">
+  <button class="btn btn-success" type="button" onclick=" finished()">Buy</button>
+
+  <button class="btn btn-primary" type="button" onclick ='addCart("${value.id}")'>Add to Cart</button>
+</div>
+    
+  </div>
+</div>
+</div>`
+            
+//           `<div class="row">
+//  <a href='product.html?product=${value.id}'><div class="card" >
+//   <img src="${value.image}" class="imagees" alt="...">
+//   <div class="card-body">
+//     <h6 class="card-title">${value.title}</h6>
+//    <p> <span class="badge bg-info text-dark">Price : </span> $ ${value.price}</p>
+
+//   </div>
+// </div></a>
+// </div>`
+
+
+);
+        });
+      })
+
+    });
+
+
+  </script>
+
+  <div>
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <h2 class="logo">E-Commerce</h2>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="/index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/cart.html">My Cart</a>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+
+
+
+    <!-- NavBar -->
+
+
+    <!-- content -->
+
+    <div class="container">
+      <div class="content" id="content">
+
+
+
+      </div>
+    </div>
+    <!-- content -->
+
+  </div>
+
+
+</body>
+
+</html>
